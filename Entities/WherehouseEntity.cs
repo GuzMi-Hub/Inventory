@@ -5,13 +5,16 @@ using System.Text;
 
 namespace Entities
 {
-    public class CategoryEntity
+    class WherehouseEntity
     {
         [Key]
         [StringLength(50)]
-        public string CategoryId { get; set; }
+        public string WherehouseId { get; set; }
         [Required]
         [StringLength(100)]
-        public string CategoryName { get; set; }
+        public string WherehouseName { get; set; }
+        [Required]
+        [StringLength(200)]
+        public string WherehouseAddress { get; set; }
     }
 }
