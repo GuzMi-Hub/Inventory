@@ -5,19 +5,28 @@ using System.Text;
 
 namespace Entities
 {
-    class StorageEntity
+    public class StorageEntity
     {
         [Key]
         [StringLength(50)]
         public string StorageId { get; set; }
+
+        [Required]
         public DateTime LastUpdate { get; set; }
+
         [Required]
         public int PartialQuantity { get; set; }
+
+        //Relación con produtos (ProductEntity)
         [Required]
-        [StringLength(10)]
         public string ProductId { get; set; }
-        [Required]
-        [StringLength(50)]
+        public ProductEntity Product { get; set; }
+
+        //Relacion con bodegas (WherehouseEntity)
         public string WherehouseId { get; set; }
+        public WherehouseEntity Wherehouse {get; set; }
+
+        //Relación con movimientos (InputOutputEntity)
+        public ICollection<InOutEntity> InOuts { get; set; }
     }
 }

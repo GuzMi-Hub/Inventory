@@ -19,5 +19,12 @@ namespace Entities
         public string ProductDescription { get; set; }
 
         public int TotalQuatity { get; set; }
+
+        //Relación con categorías (CategoryEntity)
+        public string CategoryId { get; set; }
+        public CategoryEntity Category { get; set; }
+
+        //Relación con almacenamiento (StorageEntity)
+        public ICollection<StorageEntity> Storages { get; set; }
     }
 }
