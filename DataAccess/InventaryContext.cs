@@ -18,12 +18,14 @@ namespace DataAccess
         {
             if (!options.IsConfigured)
             {
-                IConfigurationRoot configuration =
-                    new ConfigurationBuilder()
-                    .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
-                    .AddJsonFile("appsettings.json").Build();
+                //ARROJA ERROR :/
 
-                options.UseSqlServer(configuration.GetConnectionString("Local"));
+                //IConfigurationRoot configuration =
+                //    new ConfigurationBuilder()
+                //    .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
+                //    .AddJsonFile("appsettings.json").Build();
+
+                options.UseSqlServer("Server=GUZMI\\SQLEXPRESS; Database=InventoryDb; User Id=Guzmancito; Password=test1");
             }
         }
 
