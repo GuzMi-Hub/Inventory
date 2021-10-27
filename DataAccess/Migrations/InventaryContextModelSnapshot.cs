@@ -33,6 +33,38 @@ namespace DataAccess.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = "ASH",
+                            CategoryName = "Aseo Hogar"
+                        },
+                        new
+                        {
+                            CategoryId = "ASP",
+                            CategoryName = "Aseo Personal"
+                        },
+                        new
+                        {
+                            CategoryId = "HGR",
+                            CategoryName = "Hogar"
+                        },
+                        new
+                        {
+                            CategoryId = "PRF",
+                            CategoryName = "Perfumería"
+                        },
+                        new
+                        {
+                            CategoryId = "SLD",
+                            CategoryName = "Salud"
+                        },
+                        new
+                        {
+                            CategoryId = "VDJ",
+                            CategoryName = "Video Juegos"
+                        });
                 });
 
             modelBuilder.Entity("Entities.InOutEntity", b =>
@@ -86,6 +118,16 @@ namespace DataAccess.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = "ASJ-98745",
+                            CategoryId = "PRF",
+                            ProductDescription = "",
+                            ProductName = "Crema para manos marca Tersa",
+                            TotalQuatity = 0
+                        });
                 });
 
             modelBuilder.Entity("Entities.StorageEntity", b =>
@@ -118,7 +160,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.WarehouseEntity", b =>
                 {
-                    b.Property<string>("WherehouseId")
+                    b.Property<string>("WarehouseId")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
@@ -132,9 +174,23 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.HasKey("WherehouseId");
+                    b.HasKey("WarehouseId");
 
                     b.ToTable("Warehouses");
+
+                    b.HasData(
+                        new
+                        {
+                            WarehouseId = "24c897f4-9ff0-4403-85c9-7b08ee0aa15e",
+                            WarehouseAddress = "Calle 8 con 23",
+                            WarehouseName = "Bodega Central"
+                        },
+                        new
+                        {
+                            WarehouseId = "ef19b992-c8b2-4763-b02c-a14c4c697d62",
+                            WarehouseAddress = "Calle norte con occidente",
+                            WarehouseName = "Bodega Norte"
+                        });
                 });
 
             modelBuilder.Entity("Entities.InOutEntity", b =>
