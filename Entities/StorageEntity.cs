@@ -23,8 +23,8 @@ namespace Entities
         public ProductEntity Product { get; set; }
 
         //Relacion con bodegas (WherehouseEntity)
-        public string WherehouseId { get; set; }
-        public WherehouseEntity Wherehouse {get; set; }
+        public string WarehouseId { get; set; }
+        public WarehouseEntity Warehouse {get; set; }
 
         //Relación con movimientos (InputOutputEntity)
         public ICollection<InOutEntity> InOuts { get; set; }
