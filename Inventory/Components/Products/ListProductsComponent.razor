@@ -1,0 +1,47 @@
+﻿@using Entities
+@using Business 
+@inject B_Product bProduct
+@inject B_Category bCategory
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Referencia</th>
+            <th>Nombre producto</th>
+            <th>Categoria</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in products)
+            {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.Category.CategoryName</td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+
+@code {
+        List<ProductEntity> products = new List<ProductEntity>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = bProduct.ItemList();
+        foreach (var product in products)
+        {
+            if (product.CategoryId != null)
+            {
+                product.Category = bCategory.ItemList().FirstOrDefault(x => x.CategoryId == product.CategoryId);
+            }
+            else
+            {
+                product.Category.CategoryId = "N/A";
+                product.Category.CategoryName = "No Definido";
+            }
+
+        }
+    }
+}

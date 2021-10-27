@@ -21,7 +21,7 @@
             <InputSelect @bind-Value="oProduct.CategoryId" class="form-control">
                 @foreach (var category in categories)
                     {
-                        <option value="@category.CategoryName">@category.CategoryName</option>
+                        <option value="@category.CategoryId">@category.CategoryName</option>
                     }
             </InputSelect>
         </div>
