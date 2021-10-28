@@ -3,6 +3,16 @@
 @inject B_Product bProduct
 @inject B_Category bCategory
 
+<hr />
+<select class="form-control" @onchange="CategoryChanged">
+    <option value="">--Please choose an option--</option>
+    @foreach (var category in categories)
+    {
+        <option value="@category.CategoryId">@category.CategoryName</option>
+    }
+</select>
+<hr />
+
 <table class="table">
     <thead>
         <tr>
@@ -12,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var product in products)
+        @foreach(var product in tempProducts)
             {
                 <tr>
                     <td>@product.ProductId</td>
@@ -25,11 +35,15 @@
 
 
 @code {
-        List<ProductEntity> products = new List<ProductEntity>();
+    List<ProductEntity> products = new List<ProductEntity>();
+    List<ProductEntity> tempProducts = new List<ProductEntity>();
+    List<CategoryEntity> categories = new List<CategoryEntity>();
 
     protected override async Task OnInitializedAsync()
     {
         products = bProduct.ItemList();
+        tempProducts = products;
+        categories = bCategory.ItemList();
         foreach (var product in products)
         {
             if (product.CategoryId != null)
@@ -43,5 +57,10 @@
             }
 
         }
+    }
+
+    private void CategoryChanged(ChangeEventArgs e)
+    {
+        tempProducts= products.Where(c => c.CategoryId == e.Value.ToString()).ToList();
     }
 }

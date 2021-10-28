@@ -2,6 +2,7 @@
 @using Business
 @inject B_Product bProduct
 @inject B_Category bCategory
+@inject NavigationManager navManager
 <div>
     <EditForm Model="oProduct">
         <div class="form-group">
@@ -26,7 +27,7 @@
             </InputSelect>
         </div>
 
-        <input type="button" value="Agregar Producto" @onclick="SaveProduct" />
+        <input type="button" class="btn btn-primary" value="Agregar Producto" @onclick="SaveProduct" />
 
     </EditForm>
 </div>
@@ -44,5 +45,6 @@
     private void SaveProduct()
     {
         bProduct.CreateItem(oProduct);
+        navManager.NavigateTo("product/list");
     }
 }
