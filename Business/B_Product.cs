@@ -18,6 +18,14 @@ namespace Business
             }
         }
 
+        public ProductEntity ItemById(string id)
+        {
+            using (var db = new InventaryContext())
+            {
+                return db.Products.ToList().LastOrDefault(product => product.ProductId == id);
+            }
+        }
+
         public List<ProductEntity> ItemList()
         {
             using (var db = new InventaryContext())
