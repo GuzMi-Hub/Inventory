@@ -29,8 +29,16 @@ namespace Business
         {
             using (var db = new InventaryContext())
             {
-                db.Categories.Add(item);
+                db.Categories.Update(item);
                 db.SaveChanges();
+            }
+        }
+
+        public CategoryEntity ItemById(string id)
+        {
+            using (var db = new InventaryContext())
+            {
+                return db.Categories.ToList().FirstOrDefault(category => category.CategoryId == id);
             }
         }
     }

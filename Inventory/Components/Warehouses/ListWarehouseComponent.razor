@@ -1,0 +1,37 @@
+﻿@using Entities
+@using Business
+@inject B_Warehouse bWarehouse
+@inject NavigationManager navManager
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Referencia</th>
+            <th>Nombre del Warehouse</th>
+            <th>Dirección del warehouse</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var warehouse in warehouses)
+        {
+        <tr>
+            <td>@warehouse.WarehouseId</td>
+            <td>@warehouse.WarehouseName</td>
+            <td>@warehouse.WarehouseAddress</td>
+            <td><a href="warehouse/edit/@warehouse.WarehouseId">Editar</a></td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+    List<WarehouseEntity> warehouses = new List<WarehouseEntity>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        warehouses = bWarehouse.ItemList();
+    }
+}

@@ -1,0 +1,39 @@
+﻿@using Entities
+@using Business
+@inject B_InOut bInOut
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Referencia</th>
+            <th>InOut Date</th>
+            <th>Cantidad</th>
+            <th>IsInput</th>
+            <th>Storage</th>
+            <th>Editar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var inOut in inOuts)
+        {
+            <tr>
+                <td>@inOut.InOutId</td>
+                <td>@inOut.InOutDate</td>
+                <td>@inOut.Quantity</td>
+                <td>@inOut.IsInput</td>
+                <td>@inOut.StorageId</td>
+                <td><a href="inOut/edit/@inOut.InOutId">Editar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+        List<InOutEntity> inOuts = new List<InOutEntity>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        inOuts = bInOut.ItemList();
+    }
+}

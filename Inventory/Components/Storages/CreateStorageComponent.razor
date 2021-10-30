@@ -1,0 +1,72 @@
+﻿@using Business
+@using Entities
+@inject B_Storage bStorage
+@inject B_Warehouse bWarehouse
+@inject B_Product bProduct
+
+<EditForm Model="oStorage">
+    <div class="form-group">
+        <label>Bodega:</label>
+        <InputSelect @bind-Value="oStorage.WarehouseId" class="form-control">
+            <option value="">Seleccione una bodega</option>
+            @foreach (var warehouse in warehouses)
+            {
+                <option value="@warehouse.WarehouseId">@warehouse.WarehouseName</option>
+            }
+        </InputSelect>
+    </div>
+    <div class="form-group">
+        <label>Producto:</label>
+        <InputSelect @bind-Value="oStorage.ProductId" class="form-control">
+            <option value="">Seleccione una bodega</option>
+            @foreach (var product in products)
+            {
+                <option value="@product.ProductId">@product.ProductName</option>
+            }
+        </InputSelect>
+    </div>
+    <input type="button" class="btn btn-primary" value="Almacenar producto" @onclick="SaveStorage" />
+
+</EditForm>
+
+<div class="@classAlert mt-2" role="alert" >
+    @message
+</div>
+
+
+
+@code {
+    public string classAlert { get; set; }
+    public string message { get; set; }
+
+
+    StorageEntity oStorage = new StorageEntity();
+
+    List<WarehouseEntity> warehouses = new List<WarehouseEntity>();
+    List<ProductEntity> products = new List<ProductEntity>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        warehouses = bWarehouse.ItemList();
+        products = bProduct.ItemList();
+    }
+
+    private void SaveStorage()
+    {
+        oStorage.StorageId = $"{oStorage.WarehouseId}-{oStorage.ProductId}";
+        if (!bStorage.IsProductInWarehouse(oStorage.StorageId))
+        {
+            oStorage.LastUpdate = DateTime.Now;
+            bStorage.CreateItem(oStorage);
+            message = "Producto registrado";
+            classAlert = "alert alert-primary";
+        }
+        else
+        {
+            message = "El producto ya existe en la bodega";
+            classAlert = "alert alert-danger";
+        }
+
+    }
+
+}

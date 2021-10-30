@@ -22,7 +22,7 @@ namespace Business
         {
             using (var db = new InventaryContext())
             {
-                return db.Products.ToList().LastOrDefault(product => product.ProductId == id);
+                return db.Products.ToList().FirstOrDefault(product => product.ProductId == id);
             }
         }
 
@@ -42,5 +42,8 @@ namespace Business
                 db.SaveChanges();
             }
         }
+
+        
+
     }
 }

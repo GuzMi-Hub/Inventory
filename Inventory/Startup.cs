@@ -30,8 +30,11 @@ namespace Inventory
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
-            services.AddSingleton<B_Product>();
             services.AddSingleton<B_Category>();
+            services.AddSingleton<B_InOut>();
+            services.AddSingleton<B_Product>();
+            services.AddSingleton<B_Storage>();
+            services.AddSingleton<B_Warehouse>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

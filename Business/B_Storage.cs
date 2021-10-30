@@ -26,12 +26,31 @@ namespace Business
             }
         }
 
+        public StorageEntity ItemById(string id)
+        {
+            using (var db = new InventaryContext())
+            {
+                return db.Storages.ToList().FirstOrDefault(storage => storage.StorageId == id);
+            }
+        }
+
         public void UpdateItem(StorageEntity item)
         {
             using (var db = new InventaryContext())
             {
                 db.Storages.Update(item);
                 db.SaveChanges();
+            }
+        }
+        public bool IsProductInWarehouse(string idStorage)
+        {
+            using (var db = new InventaryContext())
+            {
+                var product = db.Storages.ToList()
+                       .Where(storage => storage.StorageId == idStorage);
+
+                var resultado = product.Any();
+                return resultado;
             }
         }
     }

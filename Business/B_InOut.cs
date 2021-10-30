@@ -25,6 +25,13 @@ namespace Business
                 return db.InOuts.ToList();
             }
         }
+        public InOutEntity ItemById(string id)
+        {
+            using (var db = new InventaryContext())
+            {
+                return db.InOuts.ToList().FirstOrDefault(inOut => inOut.InOutId == id);
+            }
+        }
 
         public void UpdateItem(InOutEntity item)
         {
