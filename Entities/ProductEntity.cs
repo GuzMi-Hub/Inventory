@@ -18,7 +18,7 @@ namespace Entities
         [StringLength(600)]
         public string ProductDescription { get; set; }
 
-        public int TotalQuatity { get; set; }
+        public int TotalQuantity { get; set; }
 
         //Relación con categorías (CategoryEntity)
         public string CategoryId { get; set; }
